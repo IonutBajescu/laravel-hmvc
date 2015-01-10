@@ -1,0 +1,31 @@
+{
+    "name": "ionut/modules",
+    "type": "library",
+    "description": "Laravel 5 Modules. The HMVC Approach.",
+    "keywords": ["laravel modules", "laravel hmvc"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ionut Bajescu",
+            "email": "ionutbajescu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "laravel/framework": "~5",
+        "league/flysystem": ">=0.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "classmap": [
+            "src/Facades"
+        ],
+        "psr-4": {
+            "Ionut\\Modules\\": "src",
+            "Ionut\\Modules\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev"
+}
