@@ -27,5 +27,6 @@
             "Ionut\\Modules\\Tests\\": "tests"
         }
     },
+    "bin": ["bin/hmvc"],
     "minimum-stability": "dev"
 }

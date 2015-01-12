@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+if(file_exists($autoload = __DIR__ . '/../vendor/autoload.php'))
+    include $autoload;
+else
+    die("Where's my autoload?");
+
+use Ionut\Modules\Console;
+
+$commands = ['Test'];
+$application = new Console\Application();
+foreach($commands as $command) {
+    $instance = call_user_func([new ReflectionClass("Ionut\\Modules\\Console\\Commands\\{$command}"), 'newInstance']);
+    $application->add($instance);
+}
+$application->run();
