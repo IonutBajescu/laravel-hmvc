@@ -3,17 +3,15 @@
 use ArrayObject;
 use Exception;
 
+/**
+ * @property string $configFilename
+ */
 trait Config {
 
 	/**
 	 * @var string
 	 */
 	protected $path;
-
-	/**
-	 * @var string
-	 */
-	protected $configFilename = 'config.json';
 
 	/**
 	 * @var ArrayObject
@@ -38,27 +36,16 @@ trait Config {
 	{
 
 		if( ! $this->config){
-			$this->config = new ArrayObject([
-				'enabled' => true
-			]);
-
-			$file = $this->path . '/'.$this->configFilename;
-			if (file_exists($file)) {
-				$json = json_decode(file_get_contents($file));
-				if( ! $json){
-					throw new Exception("Your config $file cannot be correctly json decode.");
-				}
-				$this->config = $this->mergeConfig($this->config, new ArrayObject($json));
-			}
+			$this->updateConfig();
 		}
 
 		return $this->config;
 	}
 
 	/**
-	 * @param  ArrayObject  $default
-	 * @param  ArrayObject  $config
-	 * @return mixed
+	 * @param  array|ArrayObject  $default
+	 * @param  array|ArrayObject  $config
+	 * @return ArrayObject
 	 */
 	public function mergeConfig($default, $config)
 	{
@@ -66,6 +53,18 @@ trait Config {
 			$default[$k] = $v;
 		}
 
-		return $default;
+		return new ArrayObject($default);
+	}
+
+	public function updateConfig()
+	{
+		$file = $this->path . '/' . $this->configFilename;
+		if (file_exists($file)) {
+			$json = json_decode(file_get_contents($file));
+			if (!$json) {
+				throw new Exception("Your config $file cannot be correctly json decode.");
+			}
+			$this->config = $this->mergeConfig($this->config, $json);
+		}
 	}
 } 

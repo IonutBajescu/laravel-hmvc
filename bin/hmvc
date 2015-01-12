@@ -7,8 +7,10 @@ else
 
 use Ionut\Modules\Console;
 
-$commands = ['Test'];
-$application = new Console\Application();
+$package = new Ionut\Modules\Package;
+$application = $package->make(Console\Application::class);
+
+$commands    = ['Test', 'Install'];
 foreach($commands as $command) {
     $instance = call_user_func([new ReflectionClass("Ionut\\Modules\\Console\\Commands\\{$command}"), 'newInstance']);
     $application->add($instance);

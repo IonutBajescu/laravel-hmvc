@@ -12,14 +12,16 @@ class Module
 	protected $path;
 
 	/**
-	 * @var \ArrayObject
-	 */
-	protected $config;
-
-	/**
 	 * @var string
 	 */
 	protected $configFilename = 'module.json';
+
+	/**
+	 * @var array
+	 */
+	protected $config = [
+		'enabled' => false
+	];
 
 
 	/**
@@ -29,7 +31,7 @@ class Module
 	public function __construct($path)
 	{
 		$this->path = $path;
-		$this->getConfig();
+		$this->updateConfig();
 	}
 
 	/**

@@ -22,27 +22,22 @@ class Modules {
 	 * @param  string  $path
 	 * @throws \Exception
 	 */
-	public function __construct($path)
+	public function __construct($path = null)
 	{
-		$this->path = $path;
+		if($path){
+			$this->path = $path;
+		}
+
 		$this->collection = new ModulesCollection();
-		$this->getConfig();
-	}
-
-	/**
-	 * @param  string  $path
-	 * @return self
-	 */
-	static public function bootstrapIfExists($path)
-	{
-		return (new static($path))->bootstrapModules();
 	}
 
 	/**
 	 * @return self
 	 */
-	public function bootstrapModules()
+	public function bootstrap()
 	{
+		$this->updateConfig();
+
 		foreach(Finder::create()->in($this->path)->directories()->depth(0) as $module){
 			$this->collection->push(new Module($module->getPathName()));
 		}
@@ -73,5 +68,13 @@ class Modules {
 		return $this->collection->filter(function(Module $module){
 			return $module->config('enabled');
 		});
+	}
+
+	/**
+	 * @param string $path
+	 */
+	public function setPath($path)
+	{
+		$this->path = $path;
 	}
 } 

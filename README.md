@@ -20,3 +20,10 @@ app
 ```
 
 I'll write more about this topic on my blog, the Laravel-HMVC it's in developing phrase.
+
+## Installing new modules
+We are not reinventing the wheel here. I don't want to force on a specific workflow and the HMVC target is to reuse easy other modules.
+You'll be able to install packages though composer. 
+
+## Problems, huh?
+You can always reach me at ionutbajescu@gmail.com

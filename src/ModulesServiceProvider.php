@@ -11,8 +11,10 @@ class ModulesServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		$this->app['modules.package'] = new Package;
+
 		$this->app->bindShared(Modules::class, function($app){
-			return Modules::bootstrapIfExists(app_path('Modules'));
+			return $this->app['modules.package']['modules'];
 		});
 	}
 }

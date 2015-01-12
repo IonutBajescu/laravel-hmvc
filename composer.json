@@ -19,9 +19,6 @@
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
-        "classmap": [
-            "src/Facades"
-        ],
         "psr-4": {
             "Ionut\\Modules\\": "src",
             "Ionut\\Modules\\Tests\\": "tests"

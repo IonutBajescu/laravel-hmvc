@@ -6,7 +6,7 @@ class ModuleTest extends TestCase {
 
 	public function testEnabledDisabled()
 	{
-		$collection = Modules::bootstrapIfExists($this->fixture('EnabledDisabled/Modules'));
+		$collection = (new Modules($this->fixture('EnabledDisabled/Modules')))->bootstrap();
 
 		$activeClasses = $collection->getClasses();
 		$this->assertCount(1, $activeClasses);
